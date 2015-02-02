@@ -1,8 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
 <html>
+
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Twirlip Information Organizer</title>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.2/dojo/resources/dojo.css">
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.2/dijit/themes/dijit.css">
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.2/dijit/themes/claro/claro.css">
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.2/dojox/layout/resources/ResizeHandle.css" />
+
+<script>
+    var dojoConfig;
+    (function(){
+        var baseUrl = "/lib/";
+        dojoConfig = {
+            async: true,
+            parseOnLoad: false,
+            packages: [
+                { name: "js", location: location.pathname.replace(/\/[^/]+$/, '') + "/js"},
+                { name: "lib", location: baseUrl}
+            ]
+        };
+    }());
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.2/dojo/dojo.js"></script>
+
 </head>
-<body>
+
+<body class="claro">
+    <noscript>Please enable JavaScript to use Twirlip.</noscript>
+    <div id="startup" style="display: none"><b>Starting up Twirlip; please wait...</b></div>
+    <script>console.log("started loading..."); document.getElementById("startup").style.display="block";</script>
 Put helpful stuff here.
+<script src="js/main.js"></script>
 </body>
 </html>
