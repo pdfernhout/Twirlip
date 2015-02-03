@@ -42,19 +42,6 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     idTextBox.placeAt(mainContentPane);
     
     addBreak(mainContentPane);
-    addBreak(mainContentPane);
-    
-    addText(mainContentPane, 'Content: ');
-    addBreak(mainContentPane);
-    
-    var contentTextarea = new Textarea({
-        name: "contentTextArea",
-        style: "width: 800px;"
-    });
-    
-    contentTextarea.placeAt(mainContentPane);
-    
-    addBreak(mainContentPane);
     
     var loadButton = new Button({
         label: "Load",
@@ -69,6 +56,18 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     });
     
     saveButton.placeAt(mainContentPane);
+    
+    addBreak(mainContentPane);
+    
+    addText(mainContentPane, 'Content: ');
+    addBreak(mainContentPane);
+    
+    var contentTextarea = new Textarea({
+        name: "contentTextArea",
+        style: "width: 800px;"
+    });
+    
+    contentTextarea.placeAt(mainContentPane);
     
     function saveClicked() {
         var text = contentTextarea.get("value");
