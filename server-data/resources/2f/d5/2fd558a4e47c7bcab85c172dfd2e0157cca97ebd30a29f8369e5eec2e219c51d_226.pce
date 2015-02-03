@@ -1,0 +1,8 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "id": "test",
+  "contentType": "text/plain",
+  "committer": "tester",
+  "timestamp": "2015-02-03T01:12:39.801Z",
+  "content": "Even more testing!!!!\n"
+}
