@@ -1,0 +1,8 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "id": "test2",
+  "contentType": "text/plain",
+  "committer": "tester",
+  "timestamp": "2015-02-03T13:40:49.567Z",
+  "content": "A document with a different id -- test2\n"
+}
