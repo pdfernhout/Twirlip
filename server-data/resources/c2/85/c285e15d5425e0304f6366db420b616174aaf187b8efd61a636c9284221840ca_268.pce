@@ -1,0 +1,8 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "id": "test3",
+  "contentType": "text/html",
+  "committer": "tester",
+  "timestamp": "2015-02-03T14:59:31.735Z",
+  "content": "<html>\n<body>\nHello, <b>bold</b> new world!\n</body>\n</html>\n"
+}
