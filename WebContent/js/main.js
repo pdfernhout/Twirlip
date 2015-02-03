@@ -5,6 +5,7 @@ require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Cl
 function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
 
     var defaultDocumentID = "test";
+    var defaultContentType = "text/plain";
     
     function addBreak(contentPane) {
         contentPane.domNode.appendChild(document.createElement('br'));
@@ -61,6 +62,19 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     
     addBreak(mainContentPane);
     
+    addText(mainContentPane, 'Content type: ');
+    
+    var contentTypeTextBox = new TextBox({
+        name: "contentTypeTextBox",
+        style: "width: 800px;"
+    });
+     
+    contentTypeTextBox.set("value", defaultContentType);
+    
+    contentTypeTextBox.placeAt(mainContentPane);
+    
+    addBreak(mainContentPane);
+    
     addText(mainContentPane, 'Content: ');
     addBreak(mainContentPane);
     
@@ -76,7 +90,9 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
         console.log("Save clicked");
         var documentID = idTextBox.get("value");
         if (!documentID) return alert("no document ID");
-        var metadata = {id: documentID, contentType: "text/plain", committer: "tester", timestamp: true};        
+        var contentType = contentTypeTextBox.get("value");
+        if (!contentType) return alert("no content type");
+        var metadata = {id: documentID, contentType: contentType, committer: "tester", timestamp: true};        
         pointrel20141201Client.storeInNewEnvelope(text, metadata, function(error, serverResponse) {
             if (error) {
                 console.log("could not write new version:\n" + error);
@@ -97,6 +113,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
                 return;
             }
             console.log("envelope.contents", envelope.content);
+            contentTypeTextBox.set("value", envelope.contentType);
             contentTextarea.set("value", envelope.content);
         });
     }
