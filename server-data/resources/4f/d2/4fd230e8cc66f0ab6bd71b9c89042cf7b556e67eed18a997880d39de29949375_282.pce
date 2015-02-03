@@ -1,0 +1,8 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "id": "index.html",
+  "contentType": "text/html",
+  "committer": "tester",
+  "timestamp": "2015-02-03T15:10:11.665Z",
+  "content": "<html>\n<body>\nAn index should go here eventually....\n</body>\n</html>\n"
+}
