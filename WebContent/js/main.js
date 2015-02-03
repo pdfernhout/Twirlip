@@ -11,14 +11,24 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
         contentPane.domNode.appendChild(document.createTextNode(text));
     }
     
+    function addHTML(contentPane, htmlText) {
+        var childContentPane = new ContentPane({
+            content: htmlText
+        });
+        
+       childContentPane.placeAt(contentPane);
+       return childContentPane;
+    }
+    
     var defaultDocumentID = "test";
     
     var mainContentPane = new ContentPane({
-        content:"<p>Test of saving document</p>"
     });
     
     document.body.appendChild(mainContentPane.domNode);
     mainContentPane.startup();
+    
+    addHTML(mainContentPane, '<b>Simple editor for content</b>');
     
     addText(mainContentPane, 'ID: ');
     
@@ -90,4 +100,5 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
         });
     }
     
+    document.getElementById("startup").style.display="none";
 });
