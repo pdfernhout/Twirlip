@@ -1,0 +1,8 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "id": "index.html",
+  "contentType": "text/html",
+  "committer": "tester",
+  "timestamp": "2015-02-03T15:12:50.911Z",
+  "content": "<html>\n<body>\nAn index should go here eventually....\n<br><br>\nIn the meanwhile, you can edit pages including this index using this link: <a href=\"simple_editor_for_content.html\">simple editor for content</a>.\n\n</body>\n</html>\n"
+}
