@@ -1,7 +1,10 @@
+"use strict";
 console.log("Starting Twirlip");
 
 require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Client", "dijit/form/Textarea", "dijit/form/TextBox", "dojo/domReady!"],
 function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
+
+    var defaultDocumentID = "test";
     
     function addBreak(contentPane) {
         contentPane.domNode.appendChild(document.createElement('br'));
@@ -20,8 +23,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
        return childContentPane;
     }
     
-    var defaultDocumentID = "test";
-    
+    // Creating interface
     var mainContentPane = new ContentPane({
     });
     
@@ -36,7 +38,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
         name: "idTextBox",
         style: "width: 800px;"
     });
-    
+     
     idTextBox.set("value", defaultDocumentID);
     
     idTextBox.placeAt(mainContentPane);
