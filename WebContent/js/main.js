@@ -1,6 +1,11 @@
-console.log("Need to do helpful stuff here");
+console.log("Starting Twirlip");
 
-require(["dijit/layout/ContentPane", "dijit/form/Textarea", "dojo/domReady!"], function(ContentPane, Textarea) {
+require(["dijit/form/Button", "dijit/layout/ContentPane", "dijit/form/Textarea", "dojo/domReady!"],
+function(Button, ContentPane, Textarea) {
+    function saveClicked() {
+        console.log("Save clicked");
+    }
+    
     var contentPane = new ContentPane({
         content:"<p>I am initial content</p>"
     });
@@ -15,4 +20,14 @@ require(["dijit/layout/ContentPane", "dijit/form/Textarea", "dojo/domReady!"], f
     });
     
     textarea.placeAt(contentPane);
+    
+    contentPane.domNode.appendChild(document.createElement('br'));
+    
+    var saveButton = new Button({
+        label: "Save",
+        onClick: saveClicked
+    });
+    
+    saveButton.placeAt(contentPane);
+
 });
