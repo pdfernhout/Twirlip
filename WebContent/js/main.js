@@ -4,57 +4,57 @@ require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Cl
 function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     var defaultDocumentID = "test";
     
-    var contentPane = new ContentPane({
+    var mainContentPane = new ContentPane({
         content:"<p>Test of saving document</p>"
     });
     
-    document.body.appendChild(contentPane.domNode);
-    contentPane.startup();
+    document.body.appendChild(mainContentPane.domNode);
+    mainContentPane.startup();
     
-    contentPane.domNode.appendChild(document.createTextNode('ID: '));
+    mainContentPane.domNode.appendChild(document.createTextNode('ID: '));
     
-    var textBox = new TextBox({
+    var idTextBox = new TextBox({
         name: "idTextBox",
         style: "width: 800px;"
     });
     
-    textBox.set("value", defaultDocumentID);
+    idTextBox.set("value", defaultDocumentID);
     
-    textBox.placeAt(contentPane);
+    idTextBox.placeAt(mainContentPane);
     
-    contentPane.domNode.appendChild(document.createElement('br'));
-    contentPane.domNode.appendChild(document.createElement('br'));
+    mainContentPane.domNode.appendChild(document.createElement('br'));
+    mainContentPane.domNode.appendChild(document.createElement('br'));
     
-    contentPane.domNode.appendChild(document.createTextNode('Content: '));
-    contentPane.domNode.appendChild(document.createElement('br'));
+    mainContentPane.domNode.appendChild(document.createTextNode('Content: '));
+    mainContentPane.domNode.appendChild(document.createElement('br'));
     
-    var textarea = new Textarea({
+    var contentTextarea = new Textarea({
         name: "contentTextArea",
         style: "width: 800px;"
     });
     
-    textarea.placeAt(contentPane);
+    contentTextarea.placeAt(mainContentPane);
     
-    contentPane.domNode.appendChild(document.createElement('br'));
+    mainContentPane.domNode.appendChild(document.createElement('br'));
     
     var loadButton = new Button({
         label: "Load",
         onClick: loadClicked
     });
     
-    loadButton.placeAt(contentPane);
+    loadButton.placeAt(mainContentPane);
     
     var saveButton = new Button({
         label: "Save",
         onClick: saveClicked
     });
     
-    saveButton.placeAt(contentPane);
+    saveButton.placeAt(mainContentPane);
     
     function saveClicked() {
-        var text = textarea.get("value");
+        var text = contentTextarea.get("value");
         console.log("Save clicked");
-        var documentID = textBox.get("value");
+        var documentID = idTextBox.get("value");
         if (!documentID) return alert("no document ID");
         var metadata = {id: documentID, contentType: "text/plain", committer: "tester", timestamp: true};        
         pointrel20141201Client.storeInNewEnvelope(text, metadata, function(error, serverResponse) {
@@ -69,7 +69,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     
     function loadClicked() {
         console.log("Load clicked");
-        var documentID = textBox.get("value");
+        var documentID = idTextBox.get("value");
         if (!documentID) return alert("no document ID");
         pointrel20141201Client.loadLatestEnvelopeForID(documentID, function(error, envelope) {
             if (error) {
@@ -77,7 +77,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
                 return;
             }
             console.log("envelope.contents", envelope.content);
-            textarea.set("value", envelope.content);
+            contentTextarea.set("value", envelope.content);
         });
     }
     
