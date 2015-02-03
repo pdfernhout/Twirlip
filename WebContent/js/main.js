@@ -18,6 +18,18 @@ function(Button, ContentPane, pointrel20141201Client, Textarea) {
         });
     }
     
+    function loadClicked() {
+        console.log("Load clicked");
+        pointrel20141201Client.loadLatestEnvelopeForID("test", function(error, envelope) {
+            if (error) {
+                console.log("No stored versions could be loaded -- have any project versions been saved?");
+                return;
+            }
+            console.log("envelope.contents", envelope.content);
+            textarea.set("value", envelope.content);
+        });
+    }
+    
     var contentPane = new ContentPane({
         content:"<p>Test of saving document</p>"
     });
@@ -41,5 +53,11 @@ function(Button, ContentPane, pointrel20141201Client, Textarea) {
     });
     
     saveButton.placeAt(contentPane);
-
+    
+    var loadButton = new Button({
+        label: "Load",
+        onClick: loadClicked
+    });
+    
+    loadButton.placeAt(contentPane);
 });
