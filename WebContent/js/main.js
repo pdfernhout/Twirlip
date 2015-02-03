@@ -85,6 +85,19 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     
     contentTextarea.placeAt(mainContentPane);
     
+    addBreak(mainContentPane);
+    
+    var listVersionsButton = new Button({
+        label: "List versions",
+        onClick: listVersionsClicked
+    });
+    
+    listVersionsButton.placeAt(mainContentPane);
+    
+    addBreak(mainContentPane);
+    
+    var versionsContentPane = addHTML(mainContentPane, "Versions: ");
+    
     function saveClicked() {
         var text = contentTextarea.get("value");
         console.log("Save clicked");
@@ -116,6 +129,11 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
             contentTypeTextBox.set("value", envelope.contentType);
             contentTextarea.set("value", envelope.content);
         });
+    }
+    
+    function listVersionsClicked() {
+        console.log("List versions clicked");
+        versionsContentPane.set("content", "clicked");
     }
     
     document.getElementById("startup").style.display="none";
