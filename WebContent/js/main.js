@@ -122,7 +122,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
         if (!documentID) return alert("no document ID");
         pointrel20141201Client.loadLatestEnvelopeForID(documentID, function(error, envelope) {
             if (error) {
-                console.log("No stored versions could be loaded -- have any project versions been saved?");
+                console.log("No stored versions could be loaded -- have any versions been saved?");
                 return;
             }
             console.log("envelope.contents", envelope.content);
@@ -133,7 +133,16 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     
     function listVersionsClicked() {
         console.log("List versions clicked");
-        versionsContentPane.set("content", "clicked");
+        var documentID = idTextBox.get("value");
+        if (!documentID) return alert("no document ID");
+        pointrel20141201Client.queryByID(documentID, function(error, data) {
+            if (error) {
+                console.log("No stored versions for item could be loaded -- have any versions been saved?");
+                return;
+            }
+            console.log("data", data);
+            versionsContentPane.set("content", "<pre>" + JSON.stringify(data, null, 2) + "</pre>");
+        });
     }
     
     document.getElementById("startup").style.display="none";
