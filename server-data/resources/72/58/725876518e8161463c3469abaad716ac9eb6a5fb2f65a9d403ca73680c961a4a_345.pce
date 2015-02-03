@@ -1,0 +1,8 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "id": "test",
+  "contentType": "text/plain",
+  "committer": "test",
+  "timestamp": "2015-02-03T00:59:08.235Z",
+  "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."
+}
