@@ -2,6 +2,15 @@ console.log("Starting Twirlip");
 
 require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Client", "dijit/form/Textarea", "dijit/form/TextBox", "dojo/domReady!"],
 function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
+    
+    function addBreak(contentPane) {
+        contentPane.domNode.appendChild(document.createElement('br'));
+    }
+    
+    function addText(contentPane, text) {
+        contentPane.domNode.appendChild(document.createTextNode(text));
+    }
+    
     var defaultDocumentID = "test";
     
     var mainContentPane = new ContentPane({
@@ -11,7 +20,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     document.body.appendChild(mainContentPane.domNode);
     mainContentPane.startup();
     
-    mainContentPane.domNode.appendChild(document.createTextNode('ID: '));
+    addText(mainContentPane, 'ID: ');
     
     var idTextBox = new TextBox({
         name: "idTextBox",
@@ -22,11 +31,11 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     
     idTextBox.placeAt(mainContentPane);
     
-    mainContentPane.domNode.appendChild(document.createElement('br'));
-    mainContentPane.domNode.appendChild(document.createElement('br'));
+    addBreak(mainContentPane);
+    addBreak(mainContentPane);
     
-    mainContentPane.domNode.appendChild(document.createTextNode('Content: '));
-    mainContentPane.domNode.appendChild(document.createElement('br'));
+    addText(mainContentPane, 'Content: ');
+    addBreak(mainContentPane);
     
     var contentTextarea = new Textarea({
         name: "contentTextArea",
@@ -35,7 +44,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     
     contentTextarea.placeAt(mainContentPane);
     
-    mainContentPane.domNode.appendChild(document.createElement('br'));
+    addBreak(mainContentPane);
     
     var loadButton = new Button({
         label: "Load",
