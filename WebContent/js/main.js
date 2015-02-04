@@ -141,7 +141,7 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     
     addBreak(mainContentPane);
     
-    var versionsContentPane = addHTML(mainContentPane, "Versions: ");
+    var outputContentPane = addHTML(mainContentPane, "Versions: ");
     
     function saveClicked() {
         var text = contentTextarea.get("value");
@@ -174,7 +174,7 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
             contentTypeTextBox.set("value", envelope.contentType);
             contentTextarea.set("value", envelope.content);
             referenceTextBox.set("value", envelope.__sha256HashAndLength);
-            versionsContentPane.set("content", "");
+            // outputContentPane.set("content", "");
         });
     }
     
@@ -203,7 +203,7 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
                 return;
             }
             console.log("data", data);
-            versionsContentPane.set("content", "<pre>" + JSON.stringify(data, null, 2) + "</pre>");
+            outputContentPane.set("content", "All versions for: <b>" + documentID + "</b><br><pre>" + JSON.stringify(data, null, 2) + "</pre>");
         });
     }
     
@@ -217,7 +217,7 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
                 return;
             }
             console.log("data", data);
-            versionsContentPane.set("content", "<pre>" + JSON.stringify(data, null, 2) + "</pre>");
+            outputContentPane.set("content", "List of all IDs:<br><pre>" + JSON.stringify(data, null, 2) + "</pre>");
         });
     }
     
