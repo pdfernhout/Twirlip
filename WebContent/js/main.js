@@ -87,23 +87,23 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     
     addBreak(mainContentPane);
     
-    addText(mainContentPane, 'Hash: ');
+    addText(mainContentPane, 'Reference: ');
     
-    var hashTextBox = new TextBox({
-        name: "hashTextBox",
+    var referenceTextBox = new TextBox({
+        name: "referenceTextBox",
         style: "width: 800px;"
     });
      
-    hashTextBox.set("value", "");
+    referenceTextBox.set("value", "");
     
-    hashTextBox.placeAt(mainContentPane);
+    referenceTextBox.placeAt(mainContentPane);
     
-    var loadFromHashButton = new Button({
-        label: "Load from hash",
-        onClick: loadFromHashClicked
+    var loadFromReferenceButton = new Button({
+        label: "Load version from reference hash and length",
+        onClick: loadFromReferenceClicked
     });
     
-    loadFromHashButton.placeAt(mainContentPane);
+    loadFromReferenceButton.placeAt(mainContentPane);
 
     addBreak(mainContentPane);
     
@@ -148,16 +148,16 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
             console.log("envelope.contents", envelope.content);
             contentTypeTextBox.set("value", envelope.contentType);
             contentTextarea.set("value", envelope.content);
-            hashTextBox.set("value", envelope.__sha256HashAndLength);
+            referenceTextBox.set("value", envelope.__sha256HashAndLength);
             versionsContentPane.set("content", "");
         });
     }
     
-    function loadFromHashClicked() {
+    function loadFromReferenceClicked() {
         console.log("Load from hash clicked");
-        var documentHash = hashTextBox.get("value");
-        if (!documentHash) return alert("no document hash");
-        pointrel20141201Client.fetchEnvelope(documentHash, function(error, envelope) {
+        var documentReference = referenceTextBox.get("value");
+        if (!documentReference) return alert("no document hash");
+        pointrel20141201Client.fetchEnvelope(documentReference, function(error, envelope) {
             if (error) {
                 console.log("No stored versions could be loaded -- have any versions been saved?");
                 return;
