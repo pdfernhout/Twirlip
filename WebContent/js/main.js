@@ -87,6 +87,26 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     
     addBreak(mainContentPane);
     
+    addText(mainContentPane, 'Hash: ');
+    
+    var hashTextBox = new TextBox({
+        name: "hashTextBox",
+        style: "width: 800px;"
+    });
+     
+    hashTextBox.set("value", "");
+    
+    hashTextBox.placeAt(mainContentPane);
+    
+    var loadFromHashButton = new Button({
+        label: "Load from hash",
+        onClick: loadFromHashClicked
+    });
+    
+    loadFromHashButton.placeAt(mainContentPane);
+
+    addBreak(mainContentPane);
+    
     var listVersionsButton = new Button({
         label: "List versions",
         onClick: listVersionsClicked
@@ -121,6 +141,23 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
         var documentID = idTextBox.get("value");
         if (!documentID) return alert("no document ID");
         pointrel20141201Client.loadLatestEnvelopeForID(documentID, function(error, envelope) {
+            if (error) {
+                console.log("No stored versions could be loaded -- have any versions been saved?");
+                return;
+            }
+            console.log("envelope.contents", envelope.content);
+            contentTypeTextBox.set("value", envelope.contentType);
+            contentTextarea.set("value", envelope.content);
+            hashTextBox.set("value", envelope.__sha256HashAndLength);
+            versionsContentPane.set("content", "");
+        });
+    }
+    
+    function loadFromHashClicked() {
+        console.log("Load from hash clicked");
+        var documentHash = hashTextBox.get("value");
+        if (!documentHash) return alert("no document hash");
+        pointrel20141201Client.fetchEnvelope(documentHash, function(error, envelope) {
             if (error) {
                 console.log("No stored versions could be loaded -- have any versions been saved?");
                 return;
