@@ -1,8 +1,8 @@
 "use strict";
 console.log("Starting Twirlip");
 
-require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Client", "dijit/form/SimpleTextarea", "dijit/form/TextBox", "dojo/domReady!"],
-function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
+require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Client", "dijit/form/SimpleTextarea", "dijit/form/TextBox", "dojox/form/Uploader", "dojo/domReady!"],
+function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox, Uploader) {
 
     var defaultDocumentID = "test";
     var defaultContentType = "text/plain";
@@ -64,6 +64,16 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     
     saveButton.placeAt(mainContentPane);
     
+    // Importing
+    
+    var fileUploaderButton = new Uploader({
+        label: "Import binary data as base64-encoded text"
+    });
+    
+    fileUploaderButton.on('change', handleFileSelect);
+    
+    fileUploaderButton.placeAt(mainContentPane);
+    
     addBreak(mainContentPane);
     
     // Content type field
@@ -93,10 +103,12 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     
     contentTextarea.placeAt(mainContentPane);
     
+    addBreak(mainContentPane);
+    
     // Reference loading
     
-    addBreak(mainContentPane);
-    addBreak(mainContentPane);
+    // addBreak(mainContentPane);
+    // addBreak(mainContentPane);
     addHTML(mainContentPane, "<hr>");
     
     addText(mainContentPane, 'Reference: ');
@@ -178,6 +190,10 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
         });
     }
     
+    function importClicked() {
+        console.log("Import clicked");
+    }
+    
     function loadFromReferenceClicked() {
         console.log("Load from hash clicked");
         var documentReference = referenceTextBox.get("value");
@@ -219,6 +235,38 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
             console.log("data", data);
             outputContentPane.set("content", "List of all IDs:<br><pre>" + JSON.stringify(data, null, 2) + "</pre>");
         });
+    }
+    
+    // Conversion function from: http://stackoverflow.com/questions/9267899/arraybuffer-to-base64-encoded-string
+    function _arrayBufferToBase64( buffer ) {
+        var binary = '';
+        var bytes = new Uint8Array( buffer );
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode( bytes[ i ] );
+        }
+        return window.btoa( binary );
+    }
+    
+    // This furti
+    function handleFileSelect() {
+        var files = fileUploaderButton._files;
+        console.log("handleFileSelect", files);
+        
+        if (files.length !== 1) return console.log("expected exactly one file for change");
+        
+        var theFile = files.item(0);
+        console.log("file name", theFile.name, theFile);
+        var reader = new FileReader();
+        reader.onload = function () {
+            console.log("result", reader.result);
+            var base64Text = _arrayBufferToBase64(reader.result);
+            idTextBox.set("value", theFile.name);
+            contentTextarea.set("value", base64Text);
+            contentTypeTextBox.set("value", "base64::" + "???/???");
+        };
+        console.log("about to call read as array buffer");
+        reader.readAsArrayBuffer(theFile);
     }
     
     document.getElementById("startup").style.display="none";
