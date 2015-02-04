@@ -88,6 +88,10 @@ app.post("/survey/questions/:surveyID", function (request, response) {
     });
 });
 
+function startsWith(str, prefix) {
+    return str.indexOf(prefix) === 0;
+}
+
 function getPointrelContent(request, response) {
     var localPath = request.params.localPath;
     var indexEntries = pointrel20141201Server.referencesForID(localPath);
@@ -106,8 +110,14 @@ function getPointrelContent(request, response) {
         } catch (parseError) {
             return response.json({status: "FAILED", message: "Parse error: " + parseError});
         }
-        response.setHeader('content-type', envelope.contentType);
-        return response.end(envelope.content);
+        var contentType = envelope.contentType;
+        var content = envelope.content;
+        if (startsWith(contentType.toLowerCase(), "base64::")) {
+            contentType = contentType.substring(8);
+            content = new Buffer(content, 'base64');
+        }
+        response.setHeader('content-type', contentType);
+        return response.end(content);
     });
 }
 
