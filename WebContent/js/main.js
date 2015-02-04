@@ -170,6 +170,7 @@ function(Button, ContentPane, mimeTypes, pointrel20141201Client, SimpleTextarea,
             }
             var sha256HashAndLength = serverResponse.sha256AndLength;
             console.log("wrote sha256HashAndLength:", sha256HashAndLength);
+            referenceTextBox.set("value", sha256HashAndLength);
         });
     }
     
