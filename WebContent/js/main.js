@@ -1,8 +1,8 @@
 "use strict";
 console.log("Starting Twirlip");
 
-require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Client", "dijit/form/SimpleTextarea", "dijit/form/TextBox", "dojox/form/Uploader", "dojo/domReady!"],
-function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox, Uploader) {
+require(["dijit/form/Button", "dijit/layout/ContentPane", "js/mimeTypes.js", "js/pointrel20141201Client", "dijit/form/SimpleTextarea", "dijit/form/TextBox", "dojox/form/Uploader", "dojo/domReady!"],
+function(Button, ContentPane, mimeTypes, pointrel20141201Client, SimpleTextarea, TextBox, Uploader) {
 
     var defaultDocumentID = "test";
     var defaultContentType = "text/plain";
@@ -67,7 +67,7 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox, U
     // Importing
     
     var fileUploaderButton = new Uploader({
-        label: "Import binary data as base64-encoded text"
+        label: "Import from file, converting binary data as base64-encoded text if needed"
     });
     
     fileUploaderButton.on('change', handleFileSelect);
@@ -190,10 +190,6 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox, U
         });
     }
     
-    function importClicked() {
-        console.log("Import clicked");
-    }
-    
     function loadFromReferenceClicked() {
         console.log("Load from hash clicked");
         var documentReference = referenceTextBox.get("value");
@@ -248,7 +244,16 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox, U
         return window.btoa( binary );
     }
     
-    // This furti
+    function startsWith(str, prefix) {
+        return str.indexOf(prefix) === 0;
+    }
+    
+    function isTextContentType(contentType) {
+        if (startsWith(contentType, "text/")) return true;
+        if (contentType === "application/javascript") return true;
+        return false;
+    }
+    
     function handleFileSelect() {
         var files = fileUploaderButton._files;
         console.log("handleFileSelect", files);
@@ -257,16 +262,29 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox, U
         
         var theFile = files.item(0);
         console.log("file name", theFile.name, theFile);
+        var contentType = mimeTypes.lookup(theFile.name);
+        var convertToBase64 = !isTextContentType(contentType);
         var reader = new FileReader();
         reader.onload = function () {
             console.log("result", reader.result);
-            var base64Text = _arrayBufferToBase64(reader.result);
+            var content;
+            if (convertToBase64) {
+                var base64Text = _arrayBufferToBase64(reader.result);
+                content = base64Text;
+                contentType = "base64::" + contentType;
+            } else {
+                content = reader.result;
+            }
             idTextBox.set("value", theFile.name);
-            contentTextarea.set("value", base64Text);
-            contentTypeTextBox.set("value", "base64::" + "???/???");
+            contentTextarea.set("value", content);
+            contentTypeTextBox.set("value", contentType);
         };
         console.log("about to call read as array buffer");
-        reader.readAsArrayBuffer(theFile);
+        if (convertToBase64) {
+            reader.readAsArrayBuffer(theFile);
+        } else {
+            reader.readAsText(theFile);
+        }
     }
     
     document.getElementById("startup").style.display="none";
