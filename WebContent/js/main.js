@@ -33,6 +33,8 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     
     addHTML(mainContentPane, '<b>Simple editor for content</b>');
     
+    // ID field
+    
     addText(mainContentPane, 'ID: ');
     
     var idTextBox = new TextBox({
@@ -45,6 +47,8 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     idTextBox.placeAt(mainContentPane);
     
     addBreak(mainContentPane);
+    
+    // Load and save buttons
     
     var loadButton = new Button({
         label: "Load",
@@ -62,6 +66,8 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     
     addBreak(mainContentPane);
     
+    // Content type field
+    
     addText(mainContentPane, 'Content type: ');
     
     var contentTypeTextBox = new TextBox({
@@ -75,6 +81,8 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     
     addBreak(mainContentPane);
     
+    // Content entry
+    
     addText(mainContentPane, 'Content: ');
     addBreak(mainContentPane);
     
@@ -85,7 +93,11 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     
     contentTextarea.placeAt(mainContentPane);
     
+    // Reference loading
+    
     addBreak(mainContentPane);
+    addBreak(mainContentPane);
+    addHTML(mainContentPane, "<hr>");
     
     addText(mainContentPane, 'Reference: ');
     
@@ -98,21 +110,34 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
     
     referenceTextBox.placeAt(mainContentPane);
     
+    addBreak(mainContentPane);
+    
     var loadFromReferenceButton = new Button({
         label: "Load version from reference hash and length",
         onClick: loadFromReferenceClicked
     });
     
     loadFromReferenceButton.placeAt(mainContentPane);
-
-    addBreak(mainContentPane);
     
+    // List versions
+
     var listVersionsButton = new Button({
         label: "List versions",
         onClick: listVersionsClicked
     });
     
     listVersionsButton.placeAt(mainContentPane);
+    
+    // List IDs
+
+    var listAllIDsButton = new Button({
+        label: "List all IDs",
+        onClick: listAllIDsClicked
+    });
+    
+    listAllIDsButton.placeAt(mainContentPane);
+    
+    // Output for versions and IDs
     
     addBreak(mainContentPane);
     
@@ -175,6 +200,20 @@ function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
         pointrel20141201Client.queryByID(documentID, function(error, data) {
             if (error) {
                 console.log("No stored versions for item could be loaded -- have any versions been saved?");
+                return;
+            }
+            console.log("data", data);
+            versionsContentPane.set("content", "<pre>" + JSON.stringify(data, null, 2) + "</pre>");
+        });
+    }
+    
+    function listAllIDsClicked() {
+        console.log("List versions clicked");
+        var documentID = idTextBox.get("value");
+        if (!documentID) return alert("no document ID");
+        pointrel20141201Client.fetchIDs(function(error, data) {
+            if (error) {
+                console.log("Error retrieving list of all IDs");
                 return;
             }
             console.log("data", data);
