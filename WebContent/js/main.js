@@ -1,8 +1,8 @@
 "use strict";
 console.log("Starting Twirlip");
 
-require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Client", "dijit/form/Textarea", "dijit/form/TextBox", "dojo/domReady!"],
-function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
+require(["dijit/form/Button", "dijit/layout/ContentPane", "js/pointrel20141201Client", "dijit/form/SimpleTextarea", "dijit/form/TextBox", "dojo/domReady!"],
+function(Button, ContentPane, pointrel20141201Client, SimpleTextarea, TextBox) {
 
     var defaultDocumentID = "test";
     var defaultContentType = "text/plain";
@@ -78,7 +78,7 @@ function(Button, ContentPane, pointrel20141201Client, Textarea, TextBox) {
     addText(mainContentPane, 'Content: ');
     addBreak(mainContentPane);
     
-    var contentTextarea = new Textarea({
+    var contentTextarea = new SimpleTextarea({
         name: "contentTextArea",
         style: "width: 800px;"
     });
