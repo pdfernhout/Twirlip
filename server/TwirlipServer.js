@@ -121,7 +121,7 @@ function getPointrelContent(request, response) {
     });
 }
 
-app.use("/:localPath", getPointrelContent);
+app.use("/:localPath*", getPointrelContent);
 
 // TODO: For developer testing only; remove in final version
 app.use("/dojo-debug", express.static(__dirname + "/../../PNIWorkbookLibraries/dojo-release-1.10.0-src"));
