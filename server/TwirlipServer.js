@@ -116,7 +116,7 @@ function getPointrelContent(request, response) {
             contentType = contentType.substring(8);
             content = new Buffer(content, 'base64');
         }
-        if (typeof content !== 'string') {
+        if (typeof content !== 'string' && !Buffer.isBuffer(content)) {
             // Application is storing content directly as nested JSON
             // so make it displayable as a string by returning entire document
             content = data;
