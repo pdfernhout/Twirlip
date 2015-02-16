@@ -116,13 +116,13 @@ function getPointrelContent(request, response) {
             contentType = contentType.substring(8);
             content = new Buffer(content, 'base64');
         }
-        response.setHeader('content-type', contentType);
         if (typeof content !== 'string') {
             // Application is storing content directly as nested JSON, so make it displayable as a string
             content = JSON.stringify(content, null, 2);
             // TODO: Changed the content type returned so that it is viewable; is this OK?
             contentType = "application/json";
         }
+        response.setHeader('content-type', contentType);
         return response.end(content);
     });
 }
