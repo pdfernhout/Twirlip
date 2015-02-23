@@ -1,0 +1,59 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "__envelopeVersion": "pointrel20141201-0.0.3",
+  "id": "IBIS_test1",
+  "contentType": "text/IBISDiagram",
+  "committer": "tester",
+  "timestamp": "2015-02-23T17:29:16.549Z",
+  "content": {
+    "surfaceWidthInPixels": 800,
+    "surfaceHeightInPixels": 600,
+    "nodes": [
+      {
+        "uuid": "d45d3479-6c94-403b-81f3-cdc92aaef14d",
+        "type": "issue",
+        "x": 21,
+        "y": 149,
+        "text": "Which decision making tool to use?"
+      },
+      {
+        "uuid": "68524f3f-f668-4b55-801b-c80ae16dd0f5",
+        "type": "position",
+        "x": 196,
+        "y": 64,
+        "text": "Paper and Pencil"
+      },
+      {
+        "uuid": "eea24a9c-449b-4760-80f8-60c8c1a5cdce",
+        "type": "position",
+        "x": 157,
+        "y": 231,
+        "text": "Spreadsheet"
+      },
+      {
+        "uuid": "f9df79a9-3d02-4b5d-8608-345d530d0faa",
+        "type": "position",
+        "x": 173,
+        "y": 340,
+        "text": "IBIS"
+      }
+    ],
+    "links": [
+      {
+        "uuid": "17e5b243-e646-40c1-8011-f855c6eff826",
+        "from": "68524f3f-f668-4b55-801b-c80ae16dd0f5",
+        "to": "d45d3479-6c94-403b-81f3-cdc92aaef14d"
+      },
+      {
+        "uuid": "a5eedbbf-fe0e-4418-8f2f-556297f6fa2d",
+        "from": "eea24a9c-449b-4760-80f8-60c8c1a5cdce",
+        "to": "d45d3479-6c94-403b-81f3-cdc92aaef14d"
+      },
+      {
+        "uuid": "feb75027-fd95-4a7a-840d-14622d0b1dae",
+        "from": "f9df79a9-3d02-4b5d-8608-345d530d0faa",
+        "to": "d45d3479-6c94-403b-81f3-cdc92aaef14d"
+      }
+    ]
+  }
+}

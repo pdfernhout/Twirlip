@@ -1,0 +1,9 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "__envelopeVersion": "pointrel20141201-0.0.3",
+  "id": "index.html",
+  "contentType": "text/html",
+  "committer": "tester",
+  "timestamp": "2015-02-23T17:20:07.341Z",
+  "content": "<html>\n<head>\n<title>Twirlip index</title>\n</head>\n<body>\n<h1><b>Twirlip Information Organizer</b></h1>\n<hr>\nTo get a list of all pages, click <a href=\"list\">here</a>.<br>\nTo edit what goes on this summary index page, click <a href=\"editor#index.html\">here</a>.\n<br><br>\nUse this editor to create new pages or edit existing ones: <a href=\"editor\">more advanced editor</a>.<br>\nTip: You can add \"editor#\" in front of the page part of any URL to edit it.\n<br><br>\nIf that editor is broken, try this bare bones emergency editor: <a href=\"simple_editor_for_content.html\">emergency editor</a>.\n<br><br>\nYou can try an IBIS application: <a href=\"IBIS#IBIS_test1\">Issue Based Information System (IBIS)</a>.\n<br><br>\nHere are some example test files to get you started to view or edit:<br>\n<a href=\"editor#test\">[EDIT]</a> <a href=\"test\">test</a><br>\n<a href=\"editor#test2\">[EDIT]</a> <a href=\"test2\">test2</a><br>\n<a href=\"editor#test3\">[EDIT]</a> <a href=\"test3\">test3</a><br>\n<br><br>\n<br>\nHere is a test image (the Earth as seen from Apollo 17):<br>\n<img src=\"The_Earth_seen_from_Apollo_17.jpg\" alt=\"The Earth seen from Apollo 17\">\n</body>\n</html>\n"
+}

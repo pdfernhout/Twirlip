@@ -1,0 +1,14 @@
+{
+  "__type": "org.pointrel.pointrel20141201.PointrelContentEnvelope",
+  "__envelopeVersion": "pointrel20141201-0.0.3",
+  "id": "IBIS_test1",
+  "contentType": "text/IBISDiagram",
+  "committer": "tester",
+  "timestamp": "2015-02-23T17:21:34.840Z",
+  "content": {
+    "surfaceWidthInPixels": 800,
+    "surfaceHeightInPixels": 600,
+    "nodes": [],
+    "links": []
+  }
+}
