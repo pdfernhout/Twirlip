@@ -1,8 +1,24 @@
 "use strict";
 console.log("Starting Twirlip");
 
-require(["dijit/form/Button", "dijit/layout/ContentPane", "js/mimeTypes.js", "js/pointrel20141201Client", "dijit/form/SimpleTextarea", "dijit/form/TextBox", "dojox/form/Uploader", "dojo/domReady!"],
-function(Button, ContentPane, mimeTypes, pointrel20141201Client, SimpleTextarea, TextBox, Uploader) {
+require([
+    "dijit/form/Button",
+    "dijit/layout/ContentPane",
+    "js/mimeTypes.js",
+    "js/pointrel20141201Client",
+    "dijit/form/SimpleTextarea",
+    "dijit/form/TextBox",
+    "dojox/form/Uploader",
+    "dojo/domReady!"
+], function(
+    Button,
+    ContentPane,
+    mimeTypes,
+    pointrel20141201Client,
+    SimpleTextarea,
+    TextBox,
+    Uploader
+) {
 
     var defaultDocumentID = "test";
     var defaultContentType = "text/plain";
