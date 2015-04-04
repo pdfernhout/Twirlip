@@ -60,34 +60,6 @@ function getLatestIndexEntry(indexEntries) {
     return latest;
 }
 
-app.post("/survey/questions/:surveyID", function (request, response) {
-    var surveyID = request.params.surveyID;
-    var indexEntries = pointrel20141201Server.referencesForTag(surveyID);
-    if (!indexEntries) {
-        return response.json({status: "FAILED", message: "Survey is not defined", questions: null});
-    }
-    var indexEntry = getLatestIndexEntry(indexEntries);
-    if (!indexEntry) {
-        var errorMessage = "Survey definitions are missing timestamps";
-        console.log("ERROR: Should never get here", errorMessage);
-        return response.json({status: "FAILED", message: errorMessage, questions: null});
-    }
-    pointrel20141201Server.fetchContentForReference(indexEntry.sha256AndLength, function(error, data) {
-        if (error) {
-            console.log("ERROR reading question file: ", error);
-            return response.json({status: "FAILED", message: error, questions: null});
-        }
-        var questionsEnvelope;
-        try {
-            questionsEnvelope = JSON.parse(data);
-        } catch (parseError) {
-            return response.json({status: "FAILED", message: "Parse error: " + parseError, questions: null});
-        }
-        // TODO: Should this really have to parse the question object? Maybe should let client do it?
-        return response.json({status: "OK", message: "Retrieved survey", questions: questionsEnvelope.content});
-    });
-});
-
 function startsWith(str, prefix) {
     return str.indexOf(prefix) === 0;
 }
@@ -129,9 +101,6 @@ function getPointrelContent(request, response) {
 }
 
 app.use("/:localPath(*)", getPointrelContent);
-
-// TODO: For developer testing only; remove in final version
-app.use("/dojo-debug", express.static(__dirname + "/../../PNIWorkbookLibraries/dojo-release-1.10.0-src"));
 
 app.use(function(err, req, res, next){
     console.error(err.stack);
